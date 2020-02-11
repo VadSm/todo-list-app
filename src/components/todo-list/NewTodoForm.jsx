@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import CustomInput from 'components/common/CustomInput';
 
 const NewTodoForm = () => {
-  const [newTask, changeTask] = useState('');
+  const [newTodo, changeTodoValue] = useState('');
 
   const handleChange = ({ target }) => {
-    changeTask(target.value);
+    changeTodoValue(target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newTask);
-    changeTask('');
+    console.log(newTodo);
+    changeTodoValue('');
   };
 
   return (
@@ -22,7 +22,7 @@ const NewTodoForm = () => {
         className="new-todo-input"
         placeholder="Add a new task"
         onChange={handleChange}
-        value={newTask}
+        value={newTodo}
       />
     </form>
   );

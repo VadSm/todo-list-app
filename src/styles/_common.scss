@@ -1,0 +1,19 @@
+html {
+  body {
+    margin: 0;
+    font-family: 'Rubik', sans-serif;
+    color: $primary-text;
+
+    .App {
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      padding: 0 ($spacing * 2);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+}

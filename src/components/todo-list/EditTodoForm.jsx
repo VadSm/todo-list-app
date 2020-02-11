@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-
-import CustomInput from 'components/common/CustomInput';
 
 import { editTodo } from 'startup/redux/actions';
 
@@ -12,7 +10,11 @@ const EditTodoForm = ({
   editTodo,
 }) => {
   const [newValue, changeValue] = useState(defaultValue);
-  console.log(editTodo);
+  const inputElement = useRef(null);
+
+  useEffect(() => {
+    inputElement.current.focus();
+  }, []);
 
   const handleChange = ({ target }) => {
     changeValue(target.value);
@@ -26,8 +28,8 @@ const EditTodoForm = ({
 
   return (
     <form onSubmit={handleSubmit} className="edit-todo-form">
-      <CustomInput
-        withRef
+      <input
+        ref={inputElement}
         className="edit-todo-input"
         value={newValue}
         onChange={handleChange}

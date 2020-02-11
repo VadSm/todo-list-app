@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { toggleCompleted } from 'startup/redux/actions';
 
 import EditTodoForm from 'components/todo-list/EditTodoForm';
+import DeleteTodoButton from 'components/todo-list/DeleteTodoButton';
 
 const ToDoItem = ({ data: { id, title, completed }, toggleCompleted }) => {
   const [isEditing, toggleEditing] = useState(false);
@@ -28,10 +29,9 @@ const ToDoItem = ({ data: { id, title, completed }, toggleCompleted }) => {
           <div className="title-part">
             <span className="title">{title}</span>
           </div>
+          <DeleteTodoButton taskId={id} />
         </div>
       )}
-
-      
     </li>
   );
 };

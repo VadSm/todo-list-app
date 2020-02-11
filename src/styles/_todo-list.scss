@@ -18,6 +18,7 @@
 
       .view {
         display: flex;
+        align-items: center;
 
         .toggle-part {
           width: ($spacing * 4);
@@ -66,6 +67,22 @@
               color: $accent-color;
             }
           }
+        }
+      }
+
+      .delete-todo-btn {
+        // display: none;
+        opacity: 0;
+        pointer-events: none;
+        transition: .2s ease-in-out;
+      }
+
+      &:hover {
+        .delete-todo-btn {
+          // display: block;
+          opacity: 1;
+          pointer-events: auto;
+          transition: .2s ease-in-out;
         }
       }
     }

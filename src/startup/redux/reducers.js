@@ -2,7 +2,12 @@ import { combineReducers } from 'redux';
 
 import generateID from 'utils/generateID';
 
-import { ADD_TODO, TOGGLE_COMPLETED, EDIT_TODO } from './actions';
+import {
+  ADD_TODO,
+  TOGGLE_COMPLETED,
+  EDIT_TODO,
+  DELETE_TODO,
+} from './actions';
 
 const initialState = {
   tasks: [],
@@ -35,6 +40,11 @@ const todos = (state = { ...initialState }, { type, payload }) => {
 
           return task;
         }),
+      };
+    case DELETE_TODO:
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== payload),
       };
     case TOGGLE_COMPLETED:
       return {

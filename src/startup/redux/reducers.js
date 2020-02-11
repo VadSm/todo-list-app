@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 
 import generateID from 'utils/generateID';
 
-import { ADD_TODO, TOGGLE_COMPLETED } from './actions';
+import { ADD_TODO, TOGGLE_COMPLETED, EDIT_TODO } from './actions';
 
 const initialState = {
   tasks: [],
@@ -20,6 +20,21 @@ const todos = (state = { ...initialState }, { type, payload }) => {
             title: payload,
             completed: false,
           }],
+      };
+    case EDIT_TODO:
+      return {
+        ...state,
+        tasks: state.tasks.map((task) => {
+          const { id, newValue } = payload;
+          if (task.id === id) {
+            return {
+              ...task,
+              title: newValue,
+            };
+          }
+
+          return task;
+        }),
       };
     case TOGGLE_COMPLETED:
       return {

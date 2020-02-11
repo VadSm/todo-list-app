@@ -10,6 +10,22 @@
     .todo-item {
       list-style: none;
       padding: ($spacing * 2);
+      transition: .3s ease-in-out;
+
+      .title {
+        display: inline-block;
+        margin-left: ($spacing * 4);
+      }
+
+      &.completed {
+        transition: .3s ease-in-out;
+        background-color: lighten($secondary-color, 30%);
+
+        .title {
+          text-decoration: line-through;
+          color: $accent-color;
+        }
+      }
     }
   }
 }

@@ -6,8 +6,8 @@ import ToDoItem from 'components/todo-list/ToDoItem';
 
 const ToDoListContainer = ({ tasks }) => {
   const renderTasks = data => (
-    data.map(({ id, title }) => (
-      <ToDoItem key={id} title={title} />
+    data.map(task => (
+      <ToDoItem key={task.id} data={task} />
     ))
   );
 

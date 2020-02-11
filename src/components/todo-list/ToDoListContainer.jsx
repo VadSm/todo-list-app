@@ -1,19 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import NewTodoForm from 'components/todo-list/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
 
-const ToDoListContainer = () => {
+const ToDoListContainer = ({ tasks }) => {
+  const renderTasks = data => (
+    data.map(({ id, title }) => (
+      <ToDoItem key={id} title={title} />
+    ))
+  );
+
   return (
     <div className="todo-list-container">
       <NewTodoForm />
-      <ul className="todo-list">
-        <ToDoItem title="test" />
-        <ToDoItem title="test2" />
-        <ToDoItem title="test3" />
-      </ul>
+      {tasks.length > 0 ? (
+        <ul className="todo-list">
+          {renderTasks(tasks)}
+        </ul>
+      ) : (
+        <h2 className="no-todos-title">You have not any tasks yet</h2>
+      )}
     </div>
   );
 };
 
-export default ToDoListContainer;
+export default connect(({ todos: { tasks } }) => ({
+  tasks,
+}))(ToDoListContainer);

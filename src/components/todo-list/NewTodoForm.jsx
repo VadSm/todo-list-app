@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+
+import { addTodo } from 'startup/redux/actions';
 
 import CustomInput from 'components/common/CustomInput';
 
-const NewTodoForm = () => {
+const NewTodoForm = ({ addTodo }) => {
   const [newTodo, changeTodoValue] = useState('');
 
   const handleChange = ({ target }) => {
@@ -11,7 +14,7 @@ const NewTodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(newTodo);
+    addTodo(newTodo);
     changeTodoValue('');
   };
 
@@ -28,4 +31,6 @@ const NewTodoForm = () => {
   );
 };
 
-export default NewTodoForm;
+export default connect(() => ({}), {
+  addTodo,
+})(NewTodoForm);

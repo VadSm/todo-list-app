@@ -1,4 +1,8 @@
 .todo-list-container {
+  .no-todos-title {
+    margin-left: ($spacing * 2);
+  }
+  
   .todo-list {
     margin-top: ($spacing * 2);
     padding: 0;

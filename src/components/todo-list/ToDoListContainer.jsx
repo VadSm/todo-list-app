@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import NewTodoForm from 'components/todo-list/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
+import CompletedControlsSection from 'components/todo-list/CompletedControlsSection';
 
 const ToDoListContainer = ({ tasks }) => {
   const renderTasks = data => (
@@ -11,13 +12,21 @@ const ToDoListContainer = ({ tasks }) => {
     ))
   );
 
+  const countOfUncompleted = tasks.filter(task => !task.completed).length;
+
   return (
     <div className="todo-list-container">
       <NewTodoForm />
       {tasks.length > 0 ? (
-        <ul className="todo-list">
-          {renderTasks(tasks)}
-        </ul>
+        <Fragment>
+          <ul className="todo-list">
+            {renderTasks(tasks)}
+          </ul>
+          <CompletedControlsSection
+            allTasksCount={tasks.length}
+            countOfUncompleted={countOfUncompleted}
+          />
+        </Fragment>
       ) : (
         <h2 className="no-todos-title">You have not any tasks yet</h2>
       )}

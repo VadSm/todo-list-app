@@ -7,6 +7,8 @@ import {
   TOGGLE_COMPLETED,
   EDIT_TODO,
   DELETE_TODO,
+  TOGGLE_ALL_TODOS_COMPLETED,
+  DELETE_ALL_COMPLETED,
 } from './actions';
 
 const initialState = {
@@ -59,6 +61,19 @@ const todos = (state = { ...initialState }, { type, payload }) => {
 
           return task;
         }),
+      };
+    case TOGGLE_ALL_TODOS_COMPLETED:
+      return {
+        ...state,
+        tasks: state.tasks.map(task => ({
+          ...task,
+          completed: payload,
+        })),
+      };
+    case DELETE_ALL_COMPLETED:
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => !task.completed),
       };
     default:
       return state;

@@ -1,0 +1,36 @@
+.completed-controls-section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  
+  .counter {
+    margin-right: auto;
+  }
+
+  .toggle-all-tasks-btn {
+    width: ($spacing * 20);
+    border: 2px solid transparent;
+
+    &.all-completed {
+      border: 2px solid $accent-color;
+      background-color: $primary-color;
+      color: $accent-color;
+      transition: .2s ease-in-out;
+
+      &:hover {
+        opacity: .7;
+        transition: .2s ease-in-out;
+      }
+    }
+  }
+
+  .delete-completed-btn {
+    border: 2px solid transparent;
+    margin-left: $spacing;
+
+    &:disabled {
+      opacity: .1;
+      cursor: auto;
+    }
+  }
+}

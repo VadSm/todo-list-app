@@ -9,6 +9,7 @@
     border: 1px solid $primary-text;
     border-radius: 10%;
     background: $primary-color;
+    cursor: pointer;
   }
 
   &:checked::after {

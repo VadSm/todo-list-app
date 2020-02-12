@@ -12,7 +12,9 @@ const CompletedControlsSection = ({
   deleteAllCompleted,
 }) => {
   const isAnyUncompleted = countOfUncompleted > 0;
-  const changeStatusFunction = () => toggleAllTodosCompleted(isAnyUncompleted);
+  const changeStatusFunction = () => {
+    toggleAllTodosCompleted(isAnyUncompleted);
+  };
 
   return (
     <div className="completed-controls-section">

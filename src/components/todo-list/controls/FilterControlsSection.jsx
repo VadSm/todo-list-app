@@ -25,7 +25,7 @@ const FilterControlsSection = ({ activeFilter }) => {
   ];
 
   const history = useHistory();
-  const handleClick = (filter) => {
+  const handleClick = ({ target: { value: filter } }) => {
     history.push(`/${filter}`);
   };
 
@@ -38,7 +38,8 @@ const FilterControlsSection = ({ activeFilter }) => {
     <CustomButton
       key={id}
       title={title}
-      onClick={() => handleClick(filter)}
+      onClick={handleClick}
+      value={filter}
       className={`filter-btn ${defaultFilter || activeFilter === filter ? 'active-filter' : ''}`}
     />
   ));

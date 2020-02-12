@@ -23,7 +23,7 @@ const ToDoItem = ({ data: { id, title, completed }, toggleCompleted }) => {
           <div className="toggle-part">
             <CustomCheckbox
               className="toggle-completed-checkbox"
-              checked={completed}
+              isChecked={completed}
               onChange={() => toggleCompleted(id)}
             />
           </div>
@@ -37,6 +37,6 @@ const ToDoItem = ({ data: { id, title, completed }, toggleCompleted }) => {
   );
 };
 
-export default connect(() => ({}), {
+export default connect(null, {
   toggleCompleted,
 })(ToDoItem);

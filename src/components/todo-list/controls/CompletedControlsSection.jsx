@@ -12,9 +12,7 @@ const CompletedControlsSection = ({
   deleteAllCompleted,
 }) => {
   const isAnyUncompleted = countOfUncompleted > 0;
-  const changeStatusFunction = () => (
-    isAnyUncompleted ? toggleAllTodosCompleted(true) : toggleAllTodosCompleted(false)
-  );
+  const changeStatusFunction = () => toggleAllTodosCompleted(isAnyUncompleted);
 
   return (
     <div className="completed-controls-section">
@@ -29,14 +27,14 @@ const CompletedControlsSection = ({
       <CustomButton
         className="delete-completed-btn"
         title="Delete completed"
-        disabled={countOfUncompleted === allTasksCount}
+        isDisabled={countOfUncompleted === allTasksCount}
         onClick={deleteAllCompleted}
       />
     </div>
   );
 };
 
-export default connect(() => ({}), {
+export default connect(null, {
   toggleAllTodosCompleted,
   deleteAllCompleted,
 })(CompletedControlsSection);

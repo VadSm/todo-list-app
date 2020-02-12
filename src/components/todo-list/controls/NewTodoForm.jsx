@@ -31,6 +31,6 @@ const NewTodoForm = ({ addTodo }) => {
   );
 };
 
-export default connect(() => ({}), {
+export default connect(null, {
   addTodo,
 })(NewTodoForm);

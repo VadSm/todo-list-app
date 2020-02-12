@@ -3,13 +3,13 @@ import React from 'react';
 const CustomButton = ({
   className = '',
   title,
-  disabled,
+  isDisabled,
   ...buttonProps
 }) => (
   <button
     type="button"
     className={`custom-button ${className}`}
-    disabled={disabled}
+    disabled={isDisabled}
     {
       ...buttonProps
     }

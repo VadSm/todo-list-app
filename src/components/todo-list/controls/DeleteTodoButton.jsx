@@ -14,6 +14,6 @@ const DeleteTodoButton = ({ taskId, deleteTodo }) => {
   );
 };
 
-export default connect(() => ({}), {
+export default connect(null, {
   deleteTodo,
 })(DeleteTodoButton);

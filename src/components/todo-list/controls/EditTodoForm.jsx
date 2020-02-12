@@ -38,6 +38,6 @@ const EditTodoForm = ({
   );
 };
 
-export default connect(() => ({}), {
+export default connect(null, {
   editTodo,
 })(EditTodoForm);

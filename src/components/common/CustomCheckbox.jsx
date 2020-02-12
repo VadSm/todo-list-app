@@ -1,8 +1,9 @@
 import React from 'react';
 
-const CustomCheckbox = ({ className = '', ...inputProps }) => (
+const CustomCheckbox = ({ className = '', isChecked, ...inputProps }) => (
   <input
     type="checkbox"
+    checked={isChecked}
     className={`custom-checkbox ${className}`}
     {
       ...inputProps

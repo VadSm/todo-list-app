@@ -1,16 +1,32 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
+import { useParams } from 'react-router-dom';
+
 import NewTodoForm from 'components/todo-list/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
 import CompletedControlsSection from 'components/todo-list/CompletedControlsSection';
+import FilterControlsSection from 'components/todo-list/FilterControlsSection';
 
 const ToDoListContainer = ({ tasks }) => {
-  const renderTasks = data => (
-    data.map(task => (
+  const { filter } = useParams();
+
+  const renderTasks = (data) => {
+    const preparedTasks = data.filter((task) => {
+      switch (filter) {
+        case 'done':
+          return task.completed;
+        case 'active':
+          return !task.completed;
+        default:
+          return task;
+      }
+    });
+
+    return preparedTasks.map(task => (
       <ToDoItem key={task.id} data={task} />
-    ))
-  );
+    ));
+  };
 
   const countOfUncompleted = tasks.filter(task => !task.completed).length;
 
@@ -26,6 +42,7 @@ const ToDoListContainer = ({ tasks }) => {
             allTasksCount={tasks.length}
             countOfUncompleted={countOfUncompleted}
           />
+          <FilterControlsSection activeFilter={filter} />
         </Fragment>
       ) : (
         <h2 className="no-todos-title">You have not any tasks yet</h2>

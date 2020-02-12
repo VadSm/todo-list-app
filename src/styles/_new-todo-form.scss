@@ -1,5 +1,13 @@
 .new-todo-form {
   .new-todo-input {
     width: 100%;
+
+    input {
+      padding-left: 20px;
+    }
+
+    .placeholder {
+      left: 21px;
+    }
   }
 }

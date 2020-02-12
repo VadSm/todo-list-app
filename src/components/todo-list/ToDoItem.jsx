@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { toggleCompleted } from 'startup/redux/actions';
 
 import CustomCheckbox from 'components/common/CustomCheckbox';
-import EditTodoForm from 'components/todo-list/EditTodoForm';
-import DeleteTodoButton from 'components/todo-list/DeleteTodoButton';
+import EditTodoForm from 'components/todo-list/controls/EditTodoForm';
+import DeleteTodoButton from 'components/todo-list/controls/DeleteTodoButton';
 
 const ToDoItem = ({ data: { id, title, completed }, toggleCompleted }) => {
   const [isEditing, toggleEditing] = useState(false);

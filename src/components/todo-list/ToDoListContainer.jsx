@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
 
-import NewTodoForm from 'components/todo-list/NewTodoForm';
+import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
-import CompletedControlsSection from 'components/todo-list/CompletedControlsSection';
-import FilterControlsSection from 'components/todo-list/FilterControlsSection';
+import CompletedControlsSection from 'components/todo-list/controls/CompletedControlsSection';
+import FilterControlsSection from 'components/todo-list/controls/FilterControlsSection';
 
 const ToDoListContainer = ({ tasks }) => {
   const { filter } = useParams();

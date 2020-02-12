@@ -1,6 +1,8 @@
 .new-todo-form {
+  display: flex;
+
   .new-todo-input {
-    width: 100%;
+    width: 80%;
 
     input {
       padding-left: 20px;

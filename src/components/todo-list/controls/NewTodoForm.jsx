@@ -4,6 +4,22 @@ import { connect } from 'react-redux';
 import { addTodo } from 'startup/redux/actions';
 
 import CustomInput from 'components/common/CustomInput';
+import CustomSelect from 'components/common/CustomSelect';
+
+const priorityOptions = [
+  {
+    id: 'high',
+    title: 'High',
+  },
+  {
+    id: 'medium',
+    title: 'Medium',
+  },
+  {
+    id: 'low',
+    title: 'Low',
+  },
+];
 
 const NewTodoForm = ({ addTodo }) => {
   const [newTodo, changeTodoValue] = useState('');
@@ -27,6 +43,14 @@ const NewTodoForm = ({ addTodo }) => {
         onChange={handleChange}
         value={newTodo}
       />
+      <CustomSelect options={priorityOptions} defaultValue="Medium" />
+      {/* <div className="custom-select">
+        <select>
+          <option>Test 1</option>
+          <option>Test 2</option>
+          <option>Test 3</option>
+        </select>
+      </div> */}
     </form>
   );
 };

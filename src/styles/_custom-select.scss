@@ -1,0 +1,80 @@
+.custom-select {
+  position: relative;
+  display: inline-block;
+  min-width: 100px;
+  height: ($spacing * 4);
+  z-index: 2;
+  line-height: 1;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    height: 16px;
+    transition: .2s ease-in-out;
+    background-image: url('/icons/dropdown-icon.svg');
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .active-value, .options .option {
+    height: 100%;
+    padding: $spacing ($spacing * 2);
+    padding-right: 32px;
+    background-color: $accent-color;
+    color: $primary-color;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .active-value {
+    z-index: 5;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .options {
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-10%);
+    transition: .2s ease-in-out;
+    pointer-events: none;
+
+    .option {
+      margin-top: 4px;
+      transition: .2s ease-in-out;
+
+      &:hover {
+        background-color: lighten($accent-color, 10%);
+        transition: .2s ease-in-out;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  &.open {
+    &::after {
+      transform: rotate(180deg);
+      transition: .2s ease-in-out;
+    }
+
+    .active-value {
+      background-color: lighten($accent-color, 10%);
+    }
+
+    .options {
+      opacity: 1;
+      transition: .2s ease-in-out;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+}

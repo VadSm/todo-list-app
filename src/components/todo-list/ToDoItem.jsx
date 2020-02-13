@@ -7,7 +7,7 @@ import CustomCheckbox from 'components/common/CustomCheckbox';
 import EditTodoForm from 'components/todo-list/controls/EditTodoForm';
 import DeleteTodoButton from 'components/todo-list/controls/DeleteTodoButton';
 
-const ToDoItem = ({ data: { id, title, completed }, toggleCompleted }) => {
+const ToDoItem = ({ data: { id, title, completed, priority }, toggleCompleted }) => {
   const [isEditing, toggleEditing] = useState(false);
 
   const handleDoubleClick = useCallback(
@@ -47,6 +47,7 @@ const ToDoItem = ({ data: { id, title, completed }, toggleCompleted }) => {
           </div>
           <div className="title-part">
             <span className="title">{title}</span>
+            <span className={`priority ${priority || ''}`}>{priority}</span>
           </div>
           <DeleteTodoButton taskId={id} />
         </div>

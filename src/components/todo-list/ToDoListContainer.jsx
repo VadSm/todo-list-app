@@ -7,13 +7,13 @@ import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
 import CompletedControlsSection from 'components/todo-list/controls/CompletedControlsSection';
 import FilterControlsSection from 'components/todo-list/controls/FilterControlsSection';
-import SortingControlsSection from 'components/todo-list/controls/SortingControlsSection';
+import PriorityControlsSection from 'components/todo-list/controls/PriorityControlsSection';
 
-const ToDoListContainer = ({ tasks, isSortedByPriority }) => {
+const ToDoListContainer = ({ tasks, isSortedByPriority, activePriorityFilter }) => {
   const { filter } = useParams();
 
   const renderTasks = (data) => {
-    const preparedTasks = data.filter((task) => {
+    let preparedTasks = data.filter((task) => {
       switch (filter) {
         case 'done':
           return task.completed;
@@ -36,6 +36,10 @@ const ToDoListContainer = ({ tasks, isSortedByPriority }) => {
       });
     }
 
+    if (activePriorityFilter) {
+      preparedTasks = preparedTasks.filter(task => task.priority === activePriorityFilter);
+    }
+
     return preparedTasks.map(task => (
       <ToDoItem key={task.id} data={task} />
     ));
@@ -56,7 +60,10 @@ const ToDoListContainer = ({ tasks, isSortedByPriority }) => {
             countOfUncompleted={countOfUncompleted}
           />
           <FilterControlsSection activeFilter={filter} />
-          <SortingControlsSection isSortedByPriority={isSortedByPriority} />
+          <PriorityControlsSection
+            activePriorityFilter={activePriorityFilter}
+            isSortedByPriority={isSortedByPriority}
+          />
         </Fragment>
       ) : (
         <h2 className="no-todos-title">You have not any tasks yet</h2>
@@ -65,7 +72,8 @@ const ToDoListContainer = ({ tasks, isSortedByPriority }) => {
   );
 };
 
-export default connect(({ todos: { tasks, isSortedByPriority } }) => ({
+export default connect(({ todos: { tasks, isSortedByPriority, activePriorityFilter } }) => ({
   tasks,
   isSortedByPriority,
+  activePriorityFilter,
 }))(ToDoListContainer);

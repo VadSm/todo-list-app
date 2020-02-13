@@ -10,11 +10,13 @@ import {
   TOGGLE_ALL_TODOS_COMPLETED,
   DELETE_ALL_COMPLETED,
   TOGGLE_SORTING_BY_PRIORITY,
+  SET_ACTIVE_PRIORITY_FILTER,
 } from './actions';
 
 const initialState = {
   tasks: [],
   isSortedByPriority: false,
+  activePriorityFilter: '',
 };
 
 const todos = (state = initialState, { type, payload }) => {
@@ -82,6 +84,11 @@ const todos = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isSortedByPriority: !state.isSortedByPriority,
+      };
+    case SET_ACTIVE_PRIORITY_FILTER:
+      return {
+        ...state,
+        activePriorityFilter: payload,
       };
     default:
       return state;

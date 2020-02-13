@@ -1,0 +1,57 @@
+.priority-controls-section {
+  display: flex;
+
+  .sort-by-priority-btn {
+    width: ($spacing * 20);
+  }
+
+  .priority-filters {
+    margin-right: auto;
+
+    .priority-filter-btn {
+      &:not(.outline) {
+        cursor: auto;
+        color: $primary-color;
+        background-color: lighten($accent-color, 0);
+      }
+
+      &.high, &.medium, &.low {
+        &:not(.outline) {
+          cursor: auto;
+          color: $primary-color;
+        }
+      }
+
+      &.high {
+        border-color: $high-priority-color;
+        color: $high-priority-color;
+
+        &:not(.outline) {
+          background-color: $high-priority-color;
+        }
+      }
+
+      &.medium {
+        border-color: $medium-priority-color;
+        color: $medium-priority-color;
+
+        &:not(.outline) {
+          background-color: $medium-priority-color;
+        }
+      }
+
+      &.low {
+        border-color: $low-priority-color;
+        color: $low-priority-color;
+
+        &:not(.outline) {
+          background-color: $low-priority-color;
+        }
+      }
+
+      &:not(:last-child) {
+        margin-right: $spacing;
+      }
+    }
+  }
+}

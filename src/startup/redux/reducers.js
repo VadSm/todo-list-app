@@ -24,7 +24,8 @@ const todos = (state = { ...initialState }, { type, payload }) => {
           ...state.tasks,
           {
             id: generateID(),
-            title: payload,
+            title: payload.title,
+            priority: payload.priority.toLowerCase(),
             completed: false,
           }],
       };

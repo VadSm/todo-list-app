@@ -23,6 +23,7 @@ const priorityOptions = [
 
 const NewTodoForm = ({ addTodo }) => {
   const [newTodo, changeTodoValue] = useState('');
+  const [priority, changePriority] = useState('Medium');
 
   const handleChange = ({ target }) => {
     changeTodoValue(target.value);
@@ -30,7 +31,10 @@ const NewTodoForm = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo(newTodo);
+    addTodo({
+      title: newTodo,
+      priority,
+    });
     changeTodoValue('');
   };
 
@@ -43,7 +47,12 @@ const NewTodoForm = ({ addTodo }) => {
         onChange={handleChange}
         value={newTodo}
       />
-      <CustomSelect options={priorityOptions} defaultValue="Medium" />
+      <CustomSelect
+        options={priorityOptions}
+        defaultValue={priority}
+        onChange={changePriority}
+        className={`priority-select ${!newTodo ? 'hidden' : ''}`}
+      />
       {/* <div className="custom-select">
         <select>
           <option>Test 1</option>

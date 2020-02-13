@@ -1,16 +1,28 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
-const CustomSelect = ({ options, defaultValue, ...selectProps }) => {
+const CustomSelect = ({
+  options,
+  defaultValue,
+  onChange: selectCallback,
+  className,
+  ...selectProps
+}) => {
   const defaultActiveValue = defaultValue || (options.length > 0 && options[0].title) || 'Choose';
 
   const [isOpen, toggleOpen] = useState(false);
   const [activeValue, changeActiveValue] = useState(defaultActiveValue);
 
-  const handleClick = ({ target: { id } }) => {
+  const handleChange = ({ target: { id } }) => {
     changeActiveValue(id);
     toggleOpen(false);
+    return selectCallback ? selectCallback(id) : null;
   };
+
+  const handleClick = useCallback(
+    () => toggleOpen(!isOpen),
+    [isOpen],
+  );
 
   const renderOptions = data => (
     data.map(({ id, title }) => (
@@ -20,7 +32,7 @@ const CustomSelect = ({ options, defaultValue, ...selectProps }) => {
         tabIndex={0}
         className="option"
         id={title}
-        onClick={handleClick}
+        onClick={handleChange}
       >
         {title}
       </div>
@@ -28,12 +40,15 @@ const CustomSelect = ({ options, defaultValue, ...selectProps }) => {
   );
 
   return (
-    <div className={`custom-select ${isOpen ? 'open' : ''}`}>
+    <div className={`custom-select ${className} ${isOpen ? 'open' : ''}`}>
       <div
         role="button"
         tabIndex={0}
         className="active-value"
-        onClick={() => toggleOpen(!isOpen)}
+        onClick={handleClick}
+        {
+          ...selectProps
+        }
       >
         {activeValue}
       </div>

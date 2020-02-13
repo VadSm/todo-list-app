@@ -12,4 +12,16 @@
       left: 21px;
     }
   }
+
+  .priority-select {
+    margin-left: auto;
+    align-self: center;
+    transition: .2s ease-in-out;
+    
+    &.hidden {
+      opacity: 0;
+      transition: .2s ease-in-out;
+      pointer-events: none;
+    }
+  }
 }

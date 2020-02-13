@@ -53,13 +53,6 @@ const NewTodoForm = ({ addTodo }) => {
         onChange={changePriority}
         className={`priority-select ${!newTodo ? 'hidden' : ''}`}
       />
-      {/* <div className="custom-select">
-        <select>
-          <option>Test 1</option>
-          <option>Test 2</option>
-          <option>Test 3</option>
-        </select>
-      </div> */}
     </form>
   );
 };

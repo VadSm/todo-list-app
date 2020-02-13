@@ -4,6 +4,7 @@ export const EDIT_TODO = 'EDIT_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const TOGGLE_ALL_TODOS_COMPLETED = 'TOGGLE_ALL_TODOS_COMPLETED';
 export const DELETE_ALL_COMPLETED = 'DELETE_ALL_COMPLETED';
+export const TOGGLE_SORTING_BY_PRIORITY = 'TOGGLE_SORTING_BY_PRIORITY';
 
 export const addTodo = payload => ({
   type: ADD_TODO,
@@ -32,4 +33,8 @@ export const toggleAllTodosCompleted = payload => ({
 
 export const deleteAllCompleted = () => ({
   type: DELETE_ALL_COMPLETED,
+});
+
+export const toggleSortingByPriority = () => ({
+  type: TOGGLE_SORTING_BY_PRIORITY,
 });

@@ -9,13 +9,15 @@ import {
   DELETE_TODO,
   TOGGLE_ALL_TODOS_COMPLETED,
   DELETE_ALL_COMPLETED,
+  TOGGLE_SORTING_BY_PRIORITY,
 } from './actions';
 
 const initialState = {
   tasks: [],
+  isSortedByPriority: false,
 };
 
-const todos = (state = { ...initialState }, { type, payload }) => {
+const todos = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD_TODO:
       return {
@@ -75,6 +77,11 @@ const todos = (state = { ...initialState }, { type, payload }) => {
       return {
         ...state,
         tasks: state.tasks.filter(task => !task.completed),
+      };
+    case TOGGLE_SORTING_BY_PRIORITY:
+      return {
+        ...state,
+        isSortedByPriority: !state.isSortedByPriority,
       };
     default:
       return state;

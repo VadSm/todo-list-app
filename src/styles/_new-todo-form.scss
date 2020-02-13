@@ -2,7 +2,7 @@
   display: flex;
 
   .new-todo-input {
-    width: 80%;
+    flex: 1;
 
     input {
       padding-left: 20px;
@@ -14,7 +14,7 @@
   }
 
   .priority-select {
-    margin-left: auto;
+    margin-left: ($spacing * 3);
     align-self: center;
     transition: .2s ease-in-out;
     

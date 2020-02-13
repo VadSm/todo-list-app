@@ -16,8 +16,8 @@ const EditTodoForm = ({
     inputElement.current.focus();
   }, []);
 
-  const handleChange = ({ target }) => {
-    changeValue(target.value);
+  const handleChange = ({ target: { value } }) => {
+    changeValue(value);
   };
 
   const handleSubmit = (e) => {

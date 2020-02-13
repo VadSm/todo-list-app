@@ -13,10 +13,10 @@ const CustomSelect = ({
   const [isOpen, toggleOpen] = useState(false);
   const [activeValue, changeActiveValue] = useState(defaultActiveValue);
 
-  const handleChange = ({ target: { id } }) => {
-    changeActiveValue(id);
+  const handleChange = ({ target: { dataset: { title, value } } }) => {
+    changeActiveValue(title);
     toggleOpen(false);
-    return selectCallback ? selectCallback(id) : null;
+    return selectCallback ? selectCallback(value) : null;
   };
 
   const handleClick = useCallback(
@@ -25,14 +25,15 @@ const CustomSelect = ({
   );
 
   const renderOptions = data => (
-    data.map(({ id, title }) => (
+    data.map(({ id, title, value }) => (
       <div
         key={id}
         role="button"
         tabIndex={0}
         className="option"
-        id={title}
         onClick={handleChange}
+        data-value={value}
+        data-title={title}
       >
         {title}
       </div>

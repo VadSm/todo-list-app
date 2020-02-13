@@ -29,7 +29,7 @@ const todos = (state = initialState, { type, payload }) => {
           {
             id: generateID(),
             title: payload.title,
-            priority: payload.priority.toLowerCase(),
+            priority: payload.priority,
             completed: false,
           }],
       };

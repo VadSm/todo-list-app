@@ -12,10 +12,6 @@
       list-style: none;
       transition: .3s ease-in-out;
 
-      // .view, .edit-todo-form {
-      //   height: 100%;
-      // }
-
       .view {
         display: flex;
         border: 2px solid transparent;
@@ -107,7 +103,7 @@
     }
   }
 
-  .filter-controls-section {
+  .filter-controls-section, .sorting-controls-section {
     margin-top: ($spacing * 2);
   }
 }

@@ -14,9 +14,10 @@ const SortingControlsSection = ({ isSortedByPriority, toggleSortingByPriority })
   return (
     <div className="sorting-controls-section">
       <CustomButton
-        className={`sort-by-priority-btn ${isSortedByPriority ? 'enabled' : ''}`}
+        className="sort-by-priority-btn"
         onClick={handleClick}
         title={isSortedByPriority ? 'Sort by time' : 'Sort by priority'}
+        outline={isSortedByPriority}
       />
     </div>
   );

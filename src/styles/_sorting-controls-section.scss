@@ -1,12 +1,5 @@
 .sorting-controls-section {
   .sort-by-priority-btn {
     width: ($spacing * 20);
-    border: 2px solid transparent;
-
-    &:not(.enabled) {
-      border: 2px solid $accent-color;
-      background-color: $primary-color;
-      color: $accent-color;
-    }
   }
 }

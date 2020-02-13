@@ -3,16 +3,8 @@
   justify-content: flex-end;
 
   .filter-btn {
-    border: 2px solid transparent;
-
     &:not(:last-child) {
       margin-right: $spacing;
-    }
-
-    &:not(.active-filter) {
-      border: 2px solid $accent-color;
-      background-color: $primary-color;
-      color: $accent-color;
     }
   }
 }

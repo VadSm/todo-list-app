@@ -4,11 +4,12 @@ const CustomButton = ({
   className = '',
   title,
   isDisabled,
+  outline,
   ...buttonProps
 }) => (
   <button
     type="button"
-    className={`custom-button ${className}`}
+    className={`custom-button ${className} ${outline ? 'outline' : ''}`}
     disabled={isDisabled}
     {
       ...buttonProps

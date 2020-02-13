@@ -22,9 +22,10 @@ const CompletedControlsSection = ({
         {isAnyUncompleted ? `You have ${countOfUncompleted} uncompleted tasks` : ''}
       </span>
       <CustomButton
-        className={`toggle-all-tasks-btn ${!isAnyUncompleted ? 'all-completed' : ''}`}
+        className="toggle-all-tasks-btn"
         title={`${isAnyUncompleted ? 'Complete all' : 'Uncomplete all'}`}
         onClick={changeStatusFunction}
+        outline={!isAnyUncompleted}
       />
       <CustomButton
         className="delete-completed-btn"

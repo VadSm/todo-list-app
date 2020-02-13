@@ -7,21 +7,22 @@ import CustomCheckbox from 'components/common/CustomCheckbox';
 import EditTodoForm from 'components/todo-list/controls/EditTodoForm';
 import DeleteTodoButton from 'components/todo-list/controls/DeleteTodoButton';
 
-const ToDoItem = ({ data: { id, title, completed, priority }, toggleCompleted }) => {
+const ToDoItem = ({
+  data: {
+    id,
+    title,
+    completed,
+    priority,
+  },
+  toggleCompleted,
+}) => {
   const [isEditing, toggleEditing] = useState(false);
 
-  const handleDoubleClick = useCallback(
+  const toggleEditMode = useCallback(
     () => {
-      toggleEditing(true);
+      toggleEditing(!isEditing);
     },
-    [toggleEditing],
-  );
-
-  const handleBlur = useCallback(
-    () => {
-      toggleEditing(false);
-    },
-    [toggleEditing],
+    [isEditing],
   );
 
   const handleChange = () => {
@@ -31,8 +32,8 @@ const ToDoItem = ({ data: { id, title, completed, priority }, toggleCompleted })
   return (
     <li
       className={`todo-item ${completed ? 'completed' : ''} ${isEditing ? 'editing' : ''}`}
-      onDoubleClick={handleDoubleClick}
-      onBlur={handleBlur}
+      onDoubleClick={toggleEditMode}
+      onBlur={toggleEditMode}
     >
       {isEditing ? (
         <EditTodoForm taskId={id} defaultValue={title} toggleEditing={toggleEditing} />

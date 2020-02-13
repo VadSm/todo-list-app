@@ -40,7 +40,8 @@ const FilterControlsSection = ({ activeFilter }) => {
       title={title}
       onClick={handleClick}
       value={filter}
-      className={`filter-btn ${defaultFilter || activeFilter === filter ? 'active-filter' : ''}`}
+      outline={!defaultFilter && activeFilter !== filter}
+      className="filter-btn"
     />
   ));
 

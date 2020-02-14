@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
+
+import { getTasks, getIsSortedByPrioritySelector, getActivePriorityFilterSelector } from 'startup/redux/selectors';
 
 import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
@@ -9,8 +11,12 @@ import CompletedControlsSection from 'components/todo-list/controls/CompletedCon
 import FilterControlsSection from 'components/todo-list/controls/FilterControlsSection';
 import PriorityControlsSection from 'components/todo-list/controls/PriorityControlsSection';
 
-const ToDoListContainer = ({ tasks, isSortedByPriority, activePriorityFilter }) => {
+const ToDoListContainer = () => {
   const { filter } = useParams();
+
+  const tasks = useSelector(getTasks);
+  const activePriorityFilter = useSelector(getActivePriorityFilterSelector);
+  const isSortedByPriority = useSelector(getIsSortedByPrioritySelector);
 
   const renderTasks = (data) => {
     let preparedTasks = data.filter((task) => {
@@ -24,21 +30,21 @@ const ToDoListContainer = ({ tasks, isSortedByPriority, activePriorityFilter }) 
       }
     });
 
-    if (isSortedByPriority) {
-      preparedTasks.sort((a, b) => {
-        const priorityValues = {
-          low: 1,
-          medium: 2,
-          high: 3,
-        };
+    // if (isSortedByPriority) {
+    //   preparedTasks.sort((a, b) => {
+    //     const priorityValues = {
+    //       low: 1,
+    //       medium: 2,
+    //       high: 3,
+    //     };
 
-        return priorityValues[b.priority] - priorityValues[a.priority];
-      });
-    }
+    //     return priorityValues[b.priority] - priorityValues[a.priority];
+    //   });
+    // }
 
-    if (activePriorityFilter) {
-      preparedTasks = preparedTasks.filter(task => task.priority === activePriorityFilter);
-    }
+    // if (activePriorityFilter) {
+    //   preparedTasks = preparedTasks.filter(task => task.priority === activePriorityFilter);
+    // }
 
     return preparedTasks.map(task => (
       <ToDoItem key={task.id} data={task} />
@@ -72,8 +78,10 @@ const ToDoListContainer = ({ tasks, isSortedByPriority, activePriorityFilter }) 
   );
 };
 
-export default connect(({ todos: { tasks, isSortedByPriority, activePriorityFilter } }) => ({
-  tasks,
-  isSortedByPriority,
-  activePriorityFilter,
-}))(ToDoListContainer);
+// export default connect(({ todos: { tasks, isSortedByPriority, activePriorityFilter } }) => ({
+//   tasks,
+//   isSortedByPriority,
+//   activePriorityFilter,
+// }))(ToDoListContainer);
+
+export default ToDoListContainer;

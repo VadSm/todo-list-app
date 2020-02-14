@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 
@@ -18,11 +20,34 @@ const ToDoItem = ({
 }) => {
   const [isEditing, toggleEditing] = useState(false);
 
-  const toggleEditMode = useCallback(
+  let clicks = 0;
+  let timer = null;
+  const handleDoubleClick = () => {
+    clicks += 1;
+
+    if (clicks === 1) {
+      timer = setTimeout(() => {
+        clicks = 0;
+      }, 200);
+    } else {
+      clearTimeout(timer);
+      toggleEditing(true);
+      clicks = 0;
+    }
+  };
+
+  // const handleDoubleClick = useCallback(
+  //   () => {
+  //     toggleEditing(true);
+  //   },
+  //   [],
+  // );
+
+  const handleBlur = useCallback(
     () => {
-      toggleEditing(!isEditing);
+      toggleEditing(false);
     },
-    [isEditing],
+    [],
   );
 
   const handleChange = () => {
@@ -32,8 +57,9 @@ const ToDoItem = ({
   return (
     <li
       className={`todo-item ${completed ? 'completed' : ''} ${isEditing ? 'editing' : ''}`}
-      onDoubleClick={toggleEditMode}
-      onBlur={toggleEditMode}
+      // onDoubleClick={handleDoubleClick}
+      onClick={handleDoubleClick}
+      onBlur={handleBlur}
     >
       {isEditing ? (
         <EditTodoForm taskId={id} defaultValue={title} toggleEditing={toggleEditing} />

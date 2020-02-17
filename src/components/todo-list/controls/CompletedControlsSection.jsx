@@ -2,7 +2,7 @@
 import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { getCountOfUncompleted } from 'startup/redux/selectors';
+import { getCountOfUncompleted, getAllTasksCount } from 'startup/redux/selectors';
 import { toggleAllTodosCompleted, deleteAllCompleted } from 'startup/redux/actions';
 
 import CustomButton from 'components/ui/CustomButton';
@@ -13,6 +13,7 @@ const CompletedControlsSection = ({
   dispatch,
 }) => {
   const isAnyUncompleted = countOfUncompleted > 0;
+
   const changeStatusFunction = useCallback(() => {
     dispatch(toggleAllTodosCompleted(isAnyUncompleted));
   }, [isAnyUncompleted]);
@@ -44,4 +45,5 @@ const CompletedControlsSection = ({
 
 export default connect(state => ({
   countOfUncompleted: getCountOfUncompleted(state),
+  allTasksCount: getAllTasksCount(state),
 }))(CompletedControlsSection);

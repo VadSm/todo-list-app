@@ -13,6 +13,11 @@ export const getCountOfUncompleted = createSelector(
   ),
 );
 
+export const getAllTasksCount = createSelector(
+  getTasksSelector,
+  tasks => tasks.length,
+);
+
 export const getSortedByPriorityTasks = createSelector(
   [getTasksSelector, getIsSortedByPrioritySelector],
   (tasks, isSortedByPriority) => {

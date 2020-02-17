@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getTasks } from 'startup/redux/selectors';
+import { getTasks, getActivePriorityFilterSelector } from 'startup/redux/selectors';
 
 import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
@@ -10,7 +10,7 @@ import CompletedControlsSection from 'components/todo-list/controls/CompletedCon
 import FilterControlsSection from 'components/todo-list/controls/FilterControlsSection';
 import PriorityControlsSection from 'components/todo-list/controls/PriorityControlsSection';
 
-const ToDoListContainer = ({ tasks }) => {
+const ToDoListContainer = ({ tasks, activePriorityFilter }) => {
   const { filter } = useParams();
 
   const renderTasks = (data) => {
@@ -33,7 +33,7 @@ const ToDoListContainer = ({ tasks }) => {
   return (
     <div className="todo-list-container">
       <NewTodoForm />
-      {tasks.length > 0 ? (
+      {activePriorityFilter || tasks.length > 0 ? (
         <Fragment>
           <ul className="todo-list">
             {renderTasks(tasks)}
@@ -42,15 +42,16 @@ const ToDoListContainer = ({ tasks }) => {
             allTasksCount={tasks.length}
           />
           <FilterControlsSection activeFilter={filter} />
+          <PriorityControlsSection activePriorityFilter={activePriorityFilter} />
         </Fragment>
       ) : (
         <h2 className="no-todos-title">You have not any tasks yet</h2>
       )}
-      <PriorityControlsSection />
     </div>
   );
 };
 
 export default connect(state => ({
   tasks: getTasks(state),
+  activePriorityFilter: getActivePriorityFilterSelector(state),
 }))(ToDoListContainer);

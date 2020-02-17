@@ -6,6 +6,13 @@ export const getIsSortedByPrioritySelector = ({ todos }) => todos.isSortedByPrio
 
 export const getActivePriorityFilterSelector = ({ todos }) => todos.activePriorityFilter;
 
+export const getCountOfUncompleted = createSelector(
+  getTasksSelector,
+  tasks => (
+    tasks.filter(task => !task.completed).length
+  ),
+);
+
 export const getSortedByPriorityTasks = createSelector(
   [getTasksSelector, getIsSortedByPrioritySelector],
   (tasks, isSortedByPriority) => {

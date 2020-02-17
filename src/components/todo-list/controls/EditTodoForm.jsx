@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+} from 'react';
 import { connect } from 'react-redux';
 
 import { editTodo } from 'startup/redux/actions';
@@ -7,7 +11,7 @@ const EditTodoForm = ({
   taskId,
   defaultValue,
   toggleEditing,
-  editTodo,
+  dispatch,
 }) => {
   const [newValue, changeValue] = useState(defaultValue);
   const inputElement = useRef(null);
@@ -22,7 +26,9 @@ const EditTodoForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    editTodo({ id: taskId, newValue });
+    dispatch(
+      editTodo({ id: taskId, newValue }),
+    );
     toggleEditing(false);
   };
 
@@ -38,6 +44,4 @@ const EditTodoForm = ({
   );
 };
 
-export default connect(null, {
-  editTodo,
-})(EditTodoForm);
+export default connect()(EditTodoForm);

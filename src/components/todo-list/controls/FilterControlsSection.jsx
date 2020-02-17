@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
@@ -25,11 +25,14 @@ const FilterControlsSection = ({ activeFilter }) => {
   ];
 
   const history = useHistory();
-  const handleClick = ({ target: { value: filter } }) => {
-    history.push(`/${filter}`);
-  };
+  const handleClick = useCallback(
+    ({ target: { value: filter } }) => {
+      history.push(`/${filter}`);
+    },
+    [history],
+  );
 
-  const renderControls = () => buttonsData.map(({
+  const filterControls = buttonsData.map(({
     id,
     title,
     filter,
@@ -47,9 +50,9 @@ const FilterControlsSection = ({ activeFilter }) => {
 
   return (
     <div className="filter-controls-section">
-      {renderControls()}
+      {filterControls}
     </div>
   );
 };
 
-export default FilterControlsSection;
+export default React.memo(FilterControlsSection);

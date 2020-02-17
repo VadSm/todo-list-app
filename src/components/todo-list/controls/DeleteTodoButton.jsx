@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import { deleteTodo } from 'startup/redux/actions';
 
-const DeleteTodoButton = ({ taskId, deleteTodo }) => {
+const DeleteTodoButton = ({ taskId, dispatch }) => {
   const handleClick = () => {
-    deleteTodo(taskId);
+    dispatch(deleteTodo(taskId));
   };
 
   return (
@@ -14,6 +14,4 @@ const DeleteTodoButton = ({ taskId, deleteTodo }) => {
   );
 };
 
-export default connect(null, {
-  deleteTodo,
-})(DeleteTodoButton);
+export default connect()(DeleteTodoButton);

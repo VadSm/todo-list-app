@@ -11,4 +11,4 @@ const CustomCheckbox = ({ className = '', isChecked, ...inputProps }) => (
   />
 );
 
-export default CustomCheckbox;
+export default React.memo(CustomCheckbox);

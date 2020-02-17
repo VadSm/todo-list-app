@@ -1,8 +1,9 @@
-import React from 'react';
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { toggleSortingByPriority, setActivePriorityFilter } from 'startup/redux/actions';
+import { getIsSortedByPrioritySelector, getActivePriorityFilterSelector } from 'startup/redux/selectors';
 
 import CustomButton from 'components/common/CustomButton';
 
@@ -30,34 +31,35 @@ const buttonsData = [
 ];
 
 const PriorityControlsSection = ({
-  isSortedByPriority,
-  toggleSortingByPriority,
   activePriorityFilter,
-  setActivePriorityFilter,
+  isSortedByPriority,
+  dispatch,
 }) => {
-  const handleClick = () => {
-    toggleSortingByPriority();
-  };
+  const handleClick = useCallback(() => {
+    dispatch(toggleSortingByPriority());
+  }, []);
 
-  const handleFilter = ({ target: { value } }) => {
-    setActivePriorityFilter(value);
-  };
+  const handleFilter = useCallback(({ target: { value } }) => {
+    dispatch(setActivePriorityFilter(value));
+  }, []);
 
-  const renderControls = () => buttonsData.map(({ id, title, filter }) => (
-    <CustomButton
-      key={id}
-      className={`priority-filter-btn ${filter || ''}`}
-      title={title}
-      outline={activePriorityFilter !== filter}
-      value={filter}
-      onClick={handleFilter}
-    />
-  ));
+  const priorityControls = useMemo(() => (
+    buttonsData.map(({ id, title, filter }) => (
+      <CustomButton
+        key={id}
+        className={`priority-filter-btn ${filter || ''}`}
+        title={title}
+        outline={activePriorityFilter !== filter}
+        value={filter}
+        onClick={handleFilter}
+      />
+    ))
+  ), [activePriorityFilter]);
 
   return (
     <div className="priority-controls-section">
       <div className="priority-filters">
-        {renderControls()}
+        {priorityControls}
       </div>
       <CustomButton
         className="sort-by-priority-btn"
@@ -69,7 +71,7 @@ const PriorityControlsSection = ({
   );
 };
 
-export default connect(null, {
-  toggleSortingByPriority,
-  setActivePriorityFilter,
-})(PriorityControlsSection);
+export default connect(state => ({
+  isSortedByPriority: getIsSortedByPrioritySelector(state),
+  activePriorityFilter: getActivePriorityFilterSelector(state),
+}))(PriorityControlsSection);

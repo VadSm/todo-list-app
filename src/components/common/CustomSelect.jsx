@@ -60,4 +60,4 @@ const CustomSelect = ({
   );
 };
 
-export default CustomSelect;
+export default React.memo(CustomSelect);

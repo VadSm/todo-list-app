@@ -1,6 +1,8 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 
+import { getCountOfUncompleted } from 'startup/redux/selectors';
 import { toggleAllTodosCompleted, deleteAllCompleted } from 'startup/redux/actions';
 
 import CustomButton from 'components/common/CustomButton';
@@ -8,13 +10,16 @@ import CustomButton from 'components/common/CustomButton';
 const CompletedControlsSection = ({
   allTasksCount,
   countOfUncompleted,
-  toggleAllTodosCompleted,
-  deleteAllCompleted,
+  dispatch,
 }) => {
   const isAnyUncompleted = countOfUncompleted > 0;
-  const changeStatusFunction = () => {
-    toggleAllTodosCompleted(isAnyUncompleted);
-  };
+  const changeStatusFunction = useCallback(() => {
+    dispatch(toggleAllTodosCompleted(isAnyUncompleted));
+  }, [isAnyUncompleted]);
+
+  const handleDelete = useCallback(() => {
+    dispatch(deleteAllCompleted());
+  }, []);
 
   return (
     <div className="completed-controls-section">
@@ -31,13 +36,12 @@ const CompletedControlsSection = ({
         className="delete-completed-btn"
         title="Delete completed"
         isDisabled={countOfUncompleted === allTasksCount}
-        onClick={deleteAllCompleted}
+        onClick={handleDelete}
       />
     </div>
   );
 };
 
-export default connect(null, {
-  toggleAllTodosCompleted,
-  deleteAllCompleted,
-})(CompletedControlsSection);
+export default connect(state => ({
+  countOfUncompleted: getCountOfUncompleted(state),
+}))(CompletedControlsSection);

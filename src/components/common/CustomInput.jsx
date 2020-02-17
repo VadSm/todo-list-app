@@ -12,4 +12,4 @@ const CustomInput = ({ className = '', placeholder, ...inputProps }) => (
   </div>
 );
 
-export default CustomInput;
+export default React.memo(CustomInput);

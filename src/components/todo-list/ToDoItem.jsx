@@ -16,49 +16,46 @@ const ToDoItem = ({
     completed,
     priority,
   },
-  toggleCompleted,
+  dispatch,
 }) => {
   const [isEditing, toggleEditing] = useState(false);
 
-  let clicks = 0;
-  let timer = null;
-  const handleDoubleClick = () => {
-    clicks += 1;
+  /*
+    implementation of method from prevention the opening of edit form by fast clicking on item
+  */
+  // let timer = null;
+  // let clicks = 0;
+  // const handleDoubleClick = () => {
+  //   clicks += 1;
 
-    if (clicks === 1) {
-      timer = setTimeout(() => {
-        clicks = 0;
-      }, 200);
-    } else {
-      clearTimeout(timer);
-      toggleEditing(true);
-      clicks = 0;
-    }
-  };
-
-  // const handleDoubleClick = useCallback(
-  //   () => {
+  //   if (clicks === 1) {
+  //     timer = setTimeout(() => {
+  //       clicks = 0;
+  //     }, 200);
+  //   } else {
+  //     clearTimeout(timer);
   //     toggleEditing(true);
-  //   },
-  //   [],
-  // );
+  //     clicks = 0;
+  //   }
+  // };
 
-  const handleBlur = useCallback(
-    () => {
-      toggleEditing(false);
-    },
-    [],
-  );
+  const handleDoubleClick = useCallback(() => {
+    toggleEditing(true);
+  }, []);
 
-  const handleChange = () => {
-    toggleCompleted(id);
-  };
+  const handleBlur = useCallback(() => {
+    toggleEditing(false);
+  }, []);
+
+  const handleChange = useCallback(() => {
+    dispatch(toggleCompleted(id));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <li
       className={`todo-item ${completed ? 'completed' : ''} ${isEditing ? 'editing' : ''}`}
-      // onDoubleClick={handleDoubleClick}
-      onClick={handleDoubleClick}
+      onDoubleClick={handleDoubleClick}
       onBlur={handleBlur}
     >
       {isEditing ? (
@@ -83,6 +80,4 @@ const ToDoItem = ({
   );
 };
 
-export default connect(null, {
-  toggleCompleted,
-})(ToDoItem);
+export default connect()(ToDoItem);

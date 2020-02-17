@@ -24,7 +24,7 @@ const priorityOptions = [
   },
 ];
 
-const NewTodoForm = ({ addTodo }) => {
+const NewTodoForm = ({ dispatch }) => {
   const [newTodo, changeTodoValue] = useState('');
   const [priority, changePriority] = useState('medium');
 
@@ -34,10 +34,10 @@ const NewTodoForm = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTodo({
+    dispatch(addTodo({
       title: newTodo,
       priority,
-    });
+    }));
     changeTodoValue('');
   };
 
@@ -60,6 +60,4 @@ const NewTodoForm = ({ addTodo }) => {
   );
 };
 
-export default connect(null, {
-  addTodo,
-})(NewTodoForm);
+export default connect()(NewTodoForm);

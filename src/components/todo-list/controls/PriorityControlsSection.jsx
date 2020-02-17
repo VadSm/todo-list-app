@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { toggleSortingByPriority, setActivePriorityFilter } from 'startup/redux/actions';
 import { getIsSortedByPrioritySelector, getActivePriorityFilterSelector } from 'startup/redux/selectors';
 
-import CustomButton from 'components/common/CustomButton';
+import CustomButton from 'components/ui/CustomButton';
 
 const buttonsData = [
   {

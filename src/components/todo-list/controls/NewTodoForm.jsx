@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { addTodo } from 'startup/redux/actions';
 
-import CustomInput from 'components/common/CustomInput';
-import CustomSelect from 'components/common/CustomSelect';
+import CustomInput from 'components/ui/CustomInput';
+import CustomSelect from 'components/ui/CustomSelect';
 
 const priorityOptions = [
   {

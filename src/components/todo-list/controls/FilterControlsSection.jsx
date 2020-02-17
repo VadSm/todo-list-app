@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
-import CustomButton from 'components/common/CustomButton';
+import CustomButton from 'components/ui/CustomButton';
 
 const FilterControlsSection = ({ activeFilter }) => {
   const buttonsData = [

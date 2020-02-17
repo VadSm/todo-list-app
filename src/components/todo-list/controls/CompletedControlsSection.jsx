@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { getCountOfUncompleted } from 'startup/redux/selectors';
 import { toggleAllTodosCompleted, deleteAllCompleted } from 'startup/redux/actions';
 
-import CustomButton from 'components/common/CustomButton';
+import CustomButton from 'components/ui/CustomButton';
 
 const CompletedControlsSection = ({
   allTasksCount,

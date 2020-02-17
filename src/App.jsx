@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Header from 'components/common/Header';
+import Header from 'components/ui/Header';
 import ToDoListContainer from 'components/todo-list/ToDoListContainer';
 
 const App = () => (

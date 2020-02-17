@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { toggleCompleted } from 'startup/redux/actions';
 
-import CustomCheckbox from 'components/common/CustomCheckbox';
+import CustomCheckbox from 'components/ui/CustomCheckbox';
 import EditTodoForm from 'components/todo-list/controls/EditTodoForm';
 import DeleteTodoButton from 'components/todo-list/controls/DeleteTodoButton';
 

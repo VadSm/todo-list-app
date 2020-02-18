@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import { connect } from 'react-redux';
 
 import { toggleSortingByPriority, setActivePriorityFilter } from 'startup/redux/actions';
-import { getIsSortedByPrioritySelector } from 'startup/redux/selectors';
+import { getIsSortedByPriority } from 'startup/redux/selectors';
 
 import CustomButton from 'components/ui/CustomButton';
 
@@ -72,5 +72,5 @@ const PriorityControlsSection = ({
 };
 
 export default connect(state => ({
-  isSortedByPriority: getIsSortedByPrioritySelector(state),
+  isSortedByPriority: getIsSortedByPriority(state),
 }))(PriorityControlsSection);

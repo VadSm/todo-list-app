@@ -1,25 +1,26 @@
 import { createSelector } from 'reselect';
 
-export const getTasksSelector = ({ todos }) => todos.tasks;
+export const getTasks = ({ todos }) => todos.tasks;
 
-export const getIsSortedByPrioritySelector = ({ todos }) => todos.isSortedByPriority;
+export const getIsSortedByPriority = ({ todos }) => todos.isSortedByPriority;
 
-export const getActivePriorityFilterSelector = ({ todos }) => todos.activePriorityFilter;
+export const getActivePriorityFilter = ({ todos }) => todos.activePriorityFilter;
 
 export const getCountOfUncompleted = createSelector(
-  getTasksSelector,
+  getTasks,
   tasks => (
     tasks.filter(task => !task.completed).length
   ),
 );
 
 export const getAllTasksCount = createSelector(
-  getTasksSelector,
+  getTasks,
   tasks => tasks.length,
 );
 
 export const getSortedByPriorityTasks = createSelector(
-  [getTasksSelector, getIsSortedByPrioritySelector],
+  getTasks,
+  getIsSortedByPriority,
   (tasks, isSortedByPriority) => {
     if (isSortedByPriority) {
       return [...tasks].sort((a, b) => {
@@ -37,9 +38,9 @@ export const getSortedByPriorityTasks = createSelector(
   },
 );
 
-export const getTasks = createSelector(
+export const getFilteredByPriorityTasks = createSelector(
   getSortedByPriorityTasks,
-  getActivePriorityFilterSelector,
+  getActivePriorityFilter,
   (tasks, activePriorityFilter) => {
     if (activePriorityFilter) {
       return tasks.filter(task => task.priority === activePriorityFilter);

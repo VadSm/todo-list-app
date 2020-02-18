@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getTasks, getActivePriorityFilterSelector } from 'startup/redux/selectors';
+import { getFilteredByPriorityTasks, getActivePriorityFilter } from 'startup/redux/selectors';
 
 import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
@@ -52,6 +52,6 @@ const ToDoListContainer = ({ tasks, activePriorityFilter }) => {
 };
 
 export default connect(state => ({
-  tasks: getTasks(state),
-  activePriorityFilter: getActivePriorityFilterSelector(state),
+  tasks: getFilteredByPriorityTasks(state),
+  activePriorityFilter: getActivePriorityFilter(state),
 }))(ToDoListContainer);

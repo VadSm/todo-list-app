@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { getFilteredByPriorityTasks, getActivePriorityFilter } from 'startup/redux/selectors';
+import { getFilteredByPriorityTasks, getActivePriorityFilter, checkIsLoading } from 'startup/redux/selectors';
 import { getTodosRequest } from 'startup/redux/thunks';
 
 import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
@@ -11,8 +11,14 @@ import ToDoItem from 'components/todo-list/ToDoItem';
 import CompletedControlsSection from 'components/todo-list/controls/CompletedControlsSection';
 import FilterControlsSection from 'components/todo-list/controls/FilterControlsSection';
 import PriorityControlsSection from 'components/todo-list/controls/PriorityControlsSection';
+import LoadingIndicator from 'components/ui/LoadingIndicator';
 
-const ToDoListContainer = ({ tasks, activePriorityFilter, dispatch }) => {
+const ToDoListContainer = ({
+  tasks,
+  activePriorityFilter,
+  dispatch,
+  isLoading,
+}) => {
   const { filter } = useParams();
 
   useEffect(() => {
@@ -38,15 +44,14 @@ const ToDoListContainer = ({ tasks, activePriorityFilter, dispatch }) => {
 
   return (
     <div className="todo-list-container">
+      {isLoading && <LoadingIndicator />}
       <NewTodoForm />
       {activePriorityFilter || tasks.length > 0 ? (
         <Fragment>
           <ul className="todo-list">
             {renderTasks(tasks)}
           </ul>
-          <CompletedControlsSection
-            allTasksCount={tasks.length}
-          />
+          <CompletedControlsSection />
           <FilterControlsSection activeFilter={filter} />
           <PriorityControlsSection activePriorityFilter={activePriorityFilter} />
         </Fragment>
@@ -60,4 +65,5 @@ const ToDoListContainer = ({ tasks, activePriorityFilter, dispatch }) => {
 export default connect(state => ({
   tasks: getFilteredByPriorityTasks(state),
   activePriorityFilter: getActivePriorityFilter(state),
+  isLoading: checkIsLoading(state),
 }))(ToDoListContainer);

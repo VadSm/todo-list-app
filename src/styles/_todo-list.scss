@@ -1,4 +1,19 @@
 .todo-list-container {
+  position: relative;
+  margin-top: $spacing * 3;
+
+  .loading-container {
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    width: calc(100% + 50px);
+    height: calc(100% + 50px);
+    min-height: $spacing * 10;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
   .no-todos-title {
     margin-left: ($spacing * 2);
   }

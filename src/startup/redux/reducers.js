@@ -17,7 +17,7 @@ const initialState = {
   tasks: [],
   isSortedByPriority: false,
   activePriorityFilter: '',
-  loading: false,
+  isLoading: false,
 };
 
 const todos = (state = initialState, { type, payload }) => {
@@ -90,7 +90,7 @@ const todos = (state = initialState, { type, payload }) => {
     case SET_LOADING:
       return {
         ...state,
-        loading: payload,
+        isLoading: payload,
       };
     case SAVE_TODOS:
       return {

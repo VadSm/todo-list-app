@@ -3,14 +3,14 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import reducers from './reducers';
-import { loadState, saveState } from './localStorage';
+// import { loadState, saveState } from './localStorage';
 
-const persistedState = loadState();
+// const persistedState = loadState();
 
 const configureStore = () => {
   const store = createStore(
     reducers,
-    persistedState,
+    // persistedState,
     compose(
       applyMiddleware(thunk),
       // eslint-disable-next-line no-undef
@@ -18,11 +18,11 @@ const configureStore = () => {
     ),
   );
 
-  store.subscribe(() => {
-    saveState({
-      todos: store.getState().todos,
-    });
-  });
+  // store.subscribe(() => {
+  //   saveState({
+  //     todos: store.getState().todos,
+  //   });
+  // });
 
   return store;
 };

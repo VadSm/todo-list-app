@@ -1,13 +1,23 @@
 /* eslint-disable no-underscore-dangle */
-import { createStore, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose,
+  combineReducers,
+} from 'redux';
 import thunk from 'redux-thunk';
 
-import reducers from './reducers';
+import todos from './reducers/todos';
+import filters from './reducers/filters';
+
+const rootReducer = combineReducers({
+  todos,
+  filters,
+});
 
 const configureStore = () => {
   const store = createStore(
-    reducers,
-    // persistedState,
+    rootReducer,
     compose(
       applyMiddleware(thunk),
       // eslint-disable-next-line no-undef

@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 import {
   ADD_TODO,
   TOGGLE_COMPLETED,
@@ -7,16 +5,12 @@ import {
   DELETE_TODO,
   TOGGLE_ALL_TODOS_COMPLETED,
   DELETE_ALL_COMPLETED,
-  TOGGLE_SORTING_BY_PRIORITY,
-  SET_ACTIVE_PRIORITY_FILTER,
   SET_LOADING,
   SAVE_TODOS,
-} from './actions';
+} from 'startup/redux/actions';
 
 const initialState = {
   tasks: [],
-  isSortedByPriority: false,
-  activePriorityFilter: '',
   isLoading: false,
 };
 
@@ -77,16 +71,6 @@ const todos = (state = initialState, { type, payload }) => {
         ...state,
         tasks: state.tasks.filter(task => !task.completed),
       };
-    case TOGGLE_SORTING_BY_PRIORITY:
-      return {
-        ...state,
-        isSortedByPriority: !state.isSortedByPriority,
-      };
-    case SET_ACTIVE_PRIORITY_FILTER:
-      return {
-        ...state,
-        activePriorityFilter: payload,
-      };
     case SET_LOADING:
       return {
         ...state,
@@ -102,6 +86,4 @@ const todos = (state = initialState, { type, payload }) => {
   }
 };
 
-export default combineReducers({
-  todos,
-});
+export default todos;

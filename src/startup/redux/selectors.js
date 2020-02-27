@@ -2,9 +2,9 @@ import { createSelector } from 'reselect';
 
 export const getTasks = ({ todos }) => todos.tasks;
 
-export const getIsSortedByPriority = ({ todos }) => todos.isSortedByPriority;
+export const getIsSortedByPriority = ({ filters }) => filters.isSortedByPriority;
 
-export const getActivePriorityFilter = ({ todos }) => todos.activePriorityFilter;
+export const getActivePriorityFilter = ({ filters }) => filters.activePriorityFilter;
 
 export const checkIsLoading = ({ todos }) => todos.isLoading;
 

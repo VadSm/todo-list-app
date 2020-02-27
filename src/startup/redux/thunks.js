@@ -1,4 +1,4 @@
-import axios from 'axios';
+import todosAPI from 'api';
 
 import {
   setLoading,
@@ -15,7 +15,7 @@ export const getTodosRequest = () => (
   (dispatch) => {
     dispatch(setLoading(true));
 
-    axios.get('http://localhost:9000/all')
+    todosAPI.getTodos()
       .then(({ data }) => dispatch(saveTodos(data)))
       .catch(err => console.error(err))
       .finally(() => dispatch(setLoading(false)));
@@ -26,10 +26,7 @@ export const createNewTodoRequest = ({ title, priority }) => (
   (dispatch) => {
     dispatch(setLoading(true));
 
-    axios.post('http://localhost:9000/create', {
-      title,
-      priority,
-    })
+    todosAPI.createTodo({ title, priority })
       .then(({ data }) => dispatch(addTodo(data)))
       .catch(err => console.error(err))
       .finally(() => dispatch(setLoading(false)));
@@ -40,7 +37,7 @@ export const deleteTodoRequest = id => (
   (dispatch) => {
     dispatch(setLoading(true));
 
-    axios.delete(`http://localhost:9000/delete/${id}`)
+    todosAPI.deleteTodo(id)
       .then(() => dispatch(deleteTodo(id)))
       .catch(err => console.error(err))
       .finally(() => dispatch(setLoading(false)));
@@ -54,7 +51,7 @@ export const updateTodoRequest = ({ id, newValue }) => (
 
     dispatch(setLoading(true));
 
-    axios.put('http://localhost:9000/update', {
+    todosAPI.updateTodo({
       ...taskToUpdate,
       title: newValue,
     })
@@ -70,7 +67,7 @@ export const updateAllTodoStatusesRequest = newStatus => (
   (dispatch) => {
     dispatch(setLoading(true));
 
-    axios.put(`http://localhost:9000/updateAllStatuses/${newStatus}`)
+    todosAPI.updateAllStatuses(newStatus)
       .then(() => dispatch(toggleAllTodosCompleted(newStatus)))
       .catch(err => console.error(err))
       .finally(() => dispatch(setLoading(false)));
@@ -81,7 +78,7 @@ export const deleteAllCompletedTodosRequest = () => (
   (dispatch) => {
     dispatch(setLoading(true));
 
-    axios.delete('http://localhost:9000/deleteAllCompleted')
+    todosAPI.deleteAllCompleted()
       .then(() => dispatch(deleteAllCompleted()))
       .catch(err => console.error(err))
       .finally(() => dispatch(setLoading(false)));
@@ -95,7 +92,7 @@ export const toggleTodoStatusRequest = id => (
 
     dispatch(setLoading(true));
 
-    axios.put('http://localhost:9000/update', {
+    todosAPI.updateTodo({
       ...taskToUpdate,
       completed: !taskToUpdate.completed,
     })

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { getFilteredByPriorityTasks, getActivePriorityFilter } from 'startup/redux/selectors';
-import { getTasksRequest } from 'startup/redux/thunks';
+import { getTodosRequest } from 'startup/redux/thunks';
 
 import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
@@ -16,7 +16,7 @@ const ToDoListContainer = ({ tasks, activePriorityFilter, dispatch }) => {
   const { filter } = useParams();
 
   useEffect(() => {
-    dispatch(getTasksRequest());
+    dispatch(getTodosRequest());
   }, []);
 
   const renderTasks = (data) => {

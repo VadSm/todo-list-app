@@ -8,7 +8,7 @@ export const TOGGLE_SORTING_BY_PRIORITY = 'TOGGLE_SORTING_BY_PRIORITY';
 export const SET_ACTIVE_PRIORITY_FILTER = 'SET_ACTIVE_PRIORITY_FILTER';
 
 export const SET_LOADING = 'SET_LOADING';
-export const SAVE_TASKS = 'SAVE_TASKS';
+export const SAVE_TODOS = 'SAVE_TODOS';
 
 export const addTodo = payload => ({
   type: ADD_TODO,
@@ -53,7 +53,7 @@ export const setLoading = payload => ({
   payload,
 });
 
-export const saveTasks = payload => ({
-  type: SAVE_TASKS,
+export const saveTodos = payload => ({
+  type: SAVE_TODOS,
   payload,
 });

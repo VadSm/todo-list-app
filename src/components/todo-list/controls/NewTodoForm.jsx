@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { addTodo } from 'startup/redux/actions';
+// import { addTodo } from 'startup/redux/actions';
+
+import { createNewTodoRequest } from 'startup/redux/thunks';
 
 import CustomInput from 'components/ui/CustomInput';
 import CustomSelect from 'components/ui/CustomSelect';
@@ -34,7 +36,11 @@ const NewTodoForm = ({ dispatch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addTodo({
+    // dispatch(addTodo({
+    //   title: newTodo,
+    //   priority,
+    // }));
+    dispatch(createNewTodoRequest({
       title: newTodo,
       priority,
     }));

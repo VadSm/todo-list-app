@@ -12,7 +12,7 @@ import {
   TOGGLE_SORTING_BY_PRIORITY,
   SET_ACTIVE_PRIORITY_FILTER,
   SET_LOADING,
-  SAVE_TASKS,
+  SAVE_TODOS,
 } from './actions';
 
 const initialState = {
@@ -29,12 +29,8 @@ const todos = (state = initialState, { type, payload }) => {
         ...state,
         tasks: [
           ...state.tasks,
-          {
-            id: generateID(),
-            title: payload.title,
-            priority: payload.priority,
-            completed: false,
-          }],
+          payload,
+        ],
       };
     case EDIT_TODO:
       return {
@@ -98,8 +94,7 @@ const todos = (state = initialState, { type, payload }) => {
         ...state,
         loading: payload,
       };
-    case SAVE_TASKS:
-      console.log(payload);
+    case SAVE_TODOS:
       return {
         ...state,
         tasks: payload,

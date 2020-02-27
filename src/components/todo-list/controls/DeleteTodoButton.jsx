@@ -2,12 +2,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import { deleteTodo } from 'startup/redux/actions';
 import { deleteTodoRequest } from 'startup/redux/thunks';
 
 const DeleteTodoButton = ({ taskId, dispatch }) => {
   const handleClick = () => {
-    // dispatch(deleteTodo(taskId));
     dispatch(deleteTodoRequest(taskId));
   };
 

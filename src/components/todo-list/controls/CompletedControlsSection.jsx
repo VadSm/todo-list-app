@@ -15,12 +15,10 @@ const CompletedControlsSection = ({
   const isAnyUncompleted = countOfUncompleted > 0;
 
   const changeStatusFunction = useCallback(() => {
-    // dispatch(toggleAllTodosCompleted(isAnyUncompleted));
     dispatch(updateAllTodoStatusesRequest(isAnyUncompleted));
   }, [isAnyUncompleted]);
 
   const handleDelete = useCallback(() => {
-    // dispatch(deleteAllCompleted());
     dispatch(deleteAllCompletedTodosRequest());
   }, []);
 

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-// import { addTodo } from 'startup/redux/actions';
-
 import { createNewTodoRequest } from 'startup/redux/thunks';
 
 import CustomInput from 'components/ui/CustomInput';

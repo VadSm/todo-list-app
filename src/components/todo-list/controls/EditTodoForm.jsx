@@ -5,7 +5,9 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 
-import { editTodo } from 'startup/redux/actions';
+// import { editTodo } from 'startup/redux/actions';
+
+import { updateTodoRequest } from 'startup/redux/thunks';
 
 const EditTodoForm = ({
   taskId,
@@ -26,8 +28,14 @@ const EditTodoForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // dispatch(
+    //   editTodo({ id: taskId, newValue }),
+    // );
     dispatch(
-      editTodo({ id: taskId, newValue }),
+      updateTodoRequest({
+        id: taskId,
+        newValue,
+      }),
     );
     toggleEditing(false);
   };

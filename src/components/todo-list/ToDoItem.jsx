@@ -3,7 +3,8 @@
 import React, { useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 
-import { toggleCompleted } from 'startup/redux/actions';
+// import { toggleCompleted } from 'startup/redux/actions';
+import { toggleTodoStatusRequest } from 'startup/redux/thunks';
 
 import CustomCheckbox from 'components/ui/CustomCheckbox';
 import EditTodoForm from 'components/todo-list/controls/EditTodoForm';
@@ -48,7 +49,8 @@ const ToDoItem = ({
   }, []);
 
   const handleChange = useCallback(() => {
-    dispatch(toggleCompleted(id));
+    // dispatch(toggleCompleted(id));
+    dispatch(toggleTodoStatusRequest(id));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

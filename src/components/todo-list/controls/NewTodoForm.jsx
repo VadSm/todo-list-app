@@ -40,10 +40,12 @@ const NewTodoForm = ({ dispatch }) => {
     //   title: newTodo,
     //   priority,
     // }));
-    dispatch(createNewTodoRequest({
-      title: newTodo,
-      priority,
-    }));
+    dispatch(
+      createNewTodoRequest({
+        title: newTodo,
+        priority,
+      }),
+    );
     changeTodoValue('');
   };
 

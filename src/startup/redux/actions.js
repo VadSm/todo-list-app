@@ -7,6 +7,9 @@ export const DELETE_ALL_COMPLETED = 'DELETE_ALL_COMPLETED';
 export const TOGGLE_SORTING_BY_PRIORITY = 'TOGGLE_SORTING_BY_PRIORITY';
 export const SET_ACTIVE_PRIORITY_FILTER = 'SET_ACTIVE_PRIORITY_FILTER';
 
+export const SET_LOADING = 'SET_LOADING';
+export const SAVE_TASKS = 'SAVE_TASKS';
+
 export const addTodo = payload => ({
   type: ADD_TODO,
   payload,
@@ -42,5 +45,15 @@ export const toggleSortingByPriority = () => ({
 
 export const setActivePriorityFilter = payload => ({
   type: SET_ACTIVE_PRIORITY_FILTER,
+  payload,
+});
+
+export const setLoading = payload => ({
+  type: SET_LOADING,
+  payload,
+});
+
+export const saveTasks = payload => ({
+  type: SAVE_TASKS,
   payload,
 });

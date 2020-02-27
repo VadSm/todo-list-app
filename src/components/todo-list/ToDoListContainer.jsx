@@ -1,8 +1,10 @@
-import React, { Fragment } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { getFilteredByPriorityTasks, getActivePriorityFilter } from 'startup/redux/selectors';
+import { getTasksRequest } from 'startup/redux/thunks';
 
 import NewTodoForm from 'components/todo-list/controls/NewTodoForm';
 import ToDoItem from 'components/todo-list/ToDoItem';
@@ -10,8 +12,12 @@ import CompletedControlsSection from 'components/todo-list/controls/CompletedCon
 import FilterControlsSection from 'components/todo-list/controls/FilterControlsSection';
 import PriorityControlsSection from 'components/todo-list/controls/PriorityControlsSection';
 
-const ToDoListContainer = ({ tasks, activePriorityFilter }) => {
+const ToDoListContainer = ({ tasks, activePriorityFilter, dispatch }) => {
   const { filter } = useParams();
+
+  useEffect(() => {
+    dispatch(getTasksRequest());
+  }, []);
 
   const renderTasks = (data) => {
     const preparedTasks = data.filter((task) => {

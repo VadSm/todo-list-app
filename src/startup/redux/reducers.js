@@ -11,12 +11,15 @@ import {
   DELETE_ALL_COMPLETED,
   TOGGLE_SORTING_BY_PRIORITY,
   SET_ACTIVE_PRIORITY_FILTER,
+  SET_LOADING,
+  SAVE_TASKS,
 } from './actions';
 
 const initialState = {
   tasks: [],
   isSortedByPriority: false,
   activePriorityFilter: '',
+  loading: false,
 };
 
 const todos = (state = initialState, { type, payload }) => {
@@ -89,6 +92,17 @@ const todos = (state = initialState, { type, payload }) => {
       return {
         ...state,
         activePriorityFilter: payload,
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: payload,
+      };
+    case SAVE_TASKS:
+      console.log(payload);
+      return {
+        ...state,
+        tasks: payload,
       };
     default:
       return state;

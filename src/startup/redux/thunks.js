@@ -11,36 +11,42 @@ import {
   toggleCompleted,
 } from './actions';
 
+const asyncRequest = (dispatch, APIMethod, resultCallback) => {
+  dispatch(setLoading(true));
+
+  APIMethod()
+    .then(resultCallback)
+    .catch(err => console.error(err))
+    .finally(() => dispatch(setLoading(false)));
+};
+
 export const getTodosRequest = () => (
   (dispatch) => {
-    dispatch(setLoading(true));
-
-    todosAPI.getTodos()
-      .then(({ data }) => dispatch(saveTodos(data)))
-      .catch(err => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+    asyncRequest(
+      dispatch,
+      todosAPI.getTodos,
+      ({ data }) => dispatch(saveTodos(data)),
+    );
   }
 );
 
 export const createNewTodoRequest = ({ title, priority }) => (
   (dispatch) => {
-    dispatch(setLoading(true));
-
-    todosAPI.createTodo({ title, priority })
-      .then(({ data }) => dispatch(addTodo(data)))
-      .catch(err => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+    asyncRequest(
+      dispatch,
+      () => todosAPI.createTodo({ title, priority }),
+      ({ data }) => dispatch(addTodo(data)),
+    );
   }
 );
 
 export const deleteTodoRequest = id => (
   (dispatch) => {
-    dispatch(setLoading(true));
-
-    todosAPI.deleteTodo(id)
-      .then(() => dispatch(deleteTodo(id)))
-      .catch(err => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+    asyncRequest(
+      dispatch,
+      () => todosAPI.deleteTodo(id),
+      ({ data }) => dispatch(deleteTodo(data)),
+    );
   }
 );
 
@@ -49,39 +55,34 @@ export const updateTodoRequest = ({ id, newValue }) => (
     const { todos: { tasks } } = getState();
     const taskToUpdate = tasks.find(task => task.id === id);
 
-    dispatch(setLoading(true));
-
-    todosAPI.updateTodo({
-      ...taskToUpdate,
-      title: newValue,
-    })
-      .then(() => dispatch(
-        editTodo({ id, newValue }),
-      ))
-      .catch(err => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+    asyncRequest(
+      dispatch,
+      () => todosAPI.updateTodo({
+        ...taskToUpdate,
+        title: newValue,
+      }),
+      () => dispatch(editTodo({ id, newValue })),
+    );
   }
 );
 
 export const updateAllTodoStatusesRequest = newStatus => (
   (dispatch) => {
-    dispatch(setLoading(true));
-
-    todosAPI.updateAllStatuses(newStatus)
-      .then(() => dispatch(toggleAllTodosCompleted(newStatus)))
-      .catch(err => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+    asyncRequest(
+      dispatch,
+      () => todosAPI.updateAllStatuses(newStatus),
+      () => dispatch(toggleAllTodosCompleted(newStatus)),
+    );
   }
 );
 
 export const deleteAllCompletedTodosRequest = () => (
   (dispatch) => {
-    dispatch(setLoading(true));
-
-    todosAPI.deleteAllCompleted()
-      .then(() => dispatch(deleteAllCompleted()))
-      .catch(err => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+    asyncRequest(
+      dispatch,
+      () => todosAPI.deleteAllCompleted(),
+      () => dispatch(deleteAllCompleted()),
+    );
   }
 );
 
@@ -90,14 +91,13 @@ export const toggleTodoStatusRequest = id => (
     const { todos: { tasks } } = getState();
     const taskToUpdate = tasks.find(task => task.id === id);
 
-    dispatch(setLoading(true));
-
-    todosAPI.updateTodo({
-      ...taskToUpdate,
-      completed: !taskToUpdate.completed,
-    })
-      .then(() => dispatch(toggleCompleted(id)))
-      .catch(err => console.error(err))
-      .finally(() => dispatch(setLoading(false)));
+    asyncRequest(
+      dispatch,
+      () => todosAPI.updateTodo({
+        ...taskToUpdate,
+        completed: !taskToUpdate.completed,
+      }),
+      () => dispatch(toggleCompleted(id)),
+    );
   }
 );

@@ -1,4 +1,5 @@
 import todosAPI from 'api';
+import { toast } from 'react-toastify';
 
 import {
   setLoading,
@@ -16,7 +17,7 @@ const asyncRequest = (dispatch, APIMethod, resultCallback) => {
 
   APIMethod()
     .then(resultCallback)
-    .catch(err => console.error(err))
+    .catch(({ message }) => toast.error(`Error: ${message}`))
     .finally(() => dispatch(setLoading(false)));
 };
 

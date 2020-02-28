@@ -34,10 +34,6 @@ const NewTodoForm = ({ dispatch }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // dispatch(addTodo({
-    //   title: newTodo,
-    //   priority,
-    // }));
     dispatch(
       createNewTodoRequest({
         title: newTodo,

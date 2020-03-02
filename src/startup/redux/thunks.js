@@ -56,14 +56,16 @@ export const updateTodoRequest = ({ id, newValue }) => (
     const { todos: { tasks } } = getState();
     const taskToUpdate = tasks.find(task => task.id === id);
 
-    asyncRequest(
-      dispatch,
-      () => todosAPI.updateTodo({
-        ...taskToUpdate,
-        title: newValue,
-      }),
-      () => dispatch(editTodo({ id, newValue })),
-    );
+    if (taskToUpdate !== undefined) {
+      asyncRequest(
+        dispatch,
+        () => todosAPI.updateTodo({
+          ...taskToUpdate,
+          title: newValue,
+        }),
+        () => dispatch(editTodo({ id, newValue })),
+      );
+    }
   }
 );
 
@@ -92,13 +94,15 @@ export const toggleTodoStatusRequest = id => (
     const { todos: { tasks } } = getState();
     const taskToUpdate = tasks.find(task => task.id === id);
 
-    asyncRequest(
-      dispatch,
-      () => todosAPI.updateTodo({
-        ...taskToUpdate,
-        completed: !taskToUpdate.completed,
-      }),
-      () => dispatch(toggleCompleted(id)),
-    );
+    if (taskToUpdate !== undefined) {
+      asyncRequest(
+        dispatch,
+        () => todosAPI.updateTodo({
+          ...taskToUpdate,
+          completed: !taskToUpdate.completed,
+        }),
+        () => dispatch(toggleCompleted(id)),
+      );
+    }
   }
 );
